@@ -79,3 +79,15 @@ textarea{
   top: 15px;
   margin: auto;
 }
+
+.past-due {
+  background-color: rgb(240, 21, 21);
+}
+
+.current {
+  background-color: rgb(41, 231, 41);
+}
+
+.past-noTask {
+  background-color: gray;
+}
