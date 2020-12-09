@@ -7,10 +7,14 @@ body {
 textarea{
   background: transparent;
   border: none;
-  resize: none;
+  resize: both;
   color: #000000;
   border-left: 1px solid black;
   padding: 10px;
+}
+
+p {
+  height: 100%;
 }
 
 .jumbotron {

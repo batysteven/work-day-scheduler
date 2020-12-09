@@ -1,19 +1,22 @@
 var tasks = {};
 
-var createTask = function(taskText) {
-    var taskP = $("<p>").text(taskText).addClass("workdayTask");
+var createTask = function(taskText, taskID) {
+    var taskID = $("<id>").addClass("workdayTask");
+    var taskP = $("<p>").addClass("m-10").text(taskText);
+    console.log(taskID, taskP);
+    taskID.append(taskP);
 
     // append p text on the page
-    $("workdayTask" + taskP).append(taskP);
+    $("workdayTask" + taskID).append(taskP);
 };
 
 //load task from localStorage
 var loadTasks= function() {
-    task = JSON.parse(localStorage.getItem("tasks"));
+    tasks = JSON.parse(localStorage.getItem("tasks"));
 
     //if nothing in localStorage, create new object to track all task
-    if (!task) {
-        task = {
+    if (!tasks) {
+        tasks = {
             nineTask: [],
             tenTask: [],
             elevenTask: [],
@@ -27,58 +30,44 @@ var loadTasks= function() {
     }
 
     // loop over object properties
-    $.each(tasks, function(list, arr) {
-        // then loop over sub-array
-        arr.forEach(function(task) {
-            createTask(task.text, list);
+    $.each(tasks, function(id) {
+        $.each(function(task) {
+            createTask(task.text, id);
         });
     });
 };
 
 var saveTasks = function() {
-    localStorage.setItem("tasks", JSON.stringify(task));
+    console.log(tasks);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 };
-
-//workdayTask text was clicked
-$(".workdayTask").on("click", "p", function() {
-    //get current text of p element
-    var text = $(this).text().trim();
-
-    //replace p element with new text
-    var textInput = $("<textarea>").val(text);
-    $(this).replaceWith(textInput);
-
-    textInput.trigger("focus");
-});
 
 //editable field was un-focused
 $(".workdayTask").on("blur", "textarea", function() {
-    //get current value of p
+    //get current value of textarea
     var text = $(this).val();
-
-    //update task in array and re-save to localStorage
-    tasks.text = text;
+    
     saveTasks();
 
     //recreate p element
     var taskP = $("<p>").text(text);
-    $(this).addClass("workdayTask");
 
     //replace text with new text
     $(this).replaceWith(taskP);
 });
 
-//
-$(".workdayTask").on("click", function() {
+//p element child of workdayTask clicked
+$(".workdayTask").on("click", "p", function() {
     //get current text of p element
     var text = $(this).text().trim();
-
+    
     //replace p element with new text
     var textInput = $("<textarea>").val(text);
     $(this).replaceWith(textInput);
-
+    
     textInput.trigger("focus");
 });  
+
 
 //load tasks for the first time
 loadTasks();
