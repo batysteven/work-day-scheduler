@@ -30,7 +30,7 @@ var loadTasks= function() {
     $.each(tasks, function(list, arr) {
         // then loop over sub-array
         arr.forEach(function(task) {
-            createTask(tasks.text, list);
+            createTask(task.text, list);
         });
     });
 };
@@ -62,10 +62,23 @@ $(".workdayTask").on("blur", "textarea", function() {
 
     //recreate p element
     var taskP = $("<p>").text(text);
+    $(this).addClass("workdayTask");
 
     //replace text with new text
     $(this).replaceWith(taskP);
 });
+
+//
+$(".workdayTask").on("click", function() {
+    //get current text of p element
+    var text = $(this).text().trim();
+
+    //replace p element with new text
+    var textInput = $("<textarea>").val(text);
+    $(this).replaceWith(textInput);
+
+    textInput.trigger("focus");
+});  
 
 //load tasks for the first time
 loadTasks();
