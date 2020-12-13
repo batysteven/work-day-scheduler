@@ -1,19 +1,19 @@
 var tasks = {};
 
-var createTask = function(taskText, taskID) {
-    var taskID = $("<id>").addClass("workdayTask");
-    var taskP = $("<p>").addClass("m-10").text(taskText);
-    //console.log(taskID, taskP);
-    taskID.append(taskP);
+var createTask = function(tasks) {
+    var text = $(tasks).val();
+    //recreate p element
+    var newTaskP = $("<p>").replaceWith(text);
+    console.log(newTaskP);
 
-    // append p text on the page
-    $("workdayTask" + taskID).append(taskP);
+    // //replace text with new text
+    newTaskP.append();
 };
 
 //load task from localStorage
 var loadTasks= function() {
     tasks = JSON.parse(localStorage.getItem("tasks"));
-
+    console.log(tasks);
     //if nothing in localStorage, create new object to track all task
     if (!tasks) {
         tasks = {
@@ -30,11 +30,9 @@ var loadTasks= function() {
     }
 
     // loop over object properties
-    $.each(tasks, function(list) {
-        $.each(function(task) {
-            createTask(task.text, list);
+        $.each(tasks, function(tasks) {
+            createTask(tasks.text);
         });
-    });
 };
 
 var saveTasks = function() {
