@@ -3,7 +3,7 @@ var tasks = {};
 var createTask = function(taskText, taskID) {
     var taskID = $("<id>").addClass("workdayTask");
     var taskP = $("<p>").addClass("m-10").text(taskText);
-    console.log(taskID, taskP);
+    //console.log(taskID, taskP);
     taskID.append(taskP);
 
     // append p text on the page
@@ -30,22 +30,28 @@ var loadTasks= function() {
     }
 
     // loop over object properties
-    $.each(tasks, function(id) {
+    $.each(tasks, function(list) {
         $.each(function(task) {
-            createTask(task.text, id);
+            createTask(task.text, list);
         });
     });
 };
 
 var saveTasks = function() {
-    console.log(tasks);
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    //console.log(tasks);
 };
 
 //editable field was un-focused
 $(".workdayTask").on("blur", "textarea", function() {
     //get current value of textarea
     var text = $(this).val();
+    console.log(this);
+    
+    // trim down list's ID to match object property
+    var arrName = $(this).parents('div').attr('id');
+    // update array on tasks object and save
+    tasks[arrName] = text;
     
     saveTasks();
 
@@ -54,6 +60,7 @@ $(".workdayTask").on("blur", "textarea", function() {
 
     //replace text with new text
     $(this).replaceWith(taskP);
+    
 });
 
 //p element child of workdayTask clicked
