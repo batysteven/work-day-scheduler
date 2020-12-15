@@ -3,17 +3,16 @@ var tasks = {};
 var createTask = function(tasks) {
     var text = $(tasks).val();
     //recreate p element
-    var newTaskP = $("<p>").replaceWith(text);
-    console.log(newTaskP);
-
-    // //replace text with new text
-    newTaskP.append();
+    console.log(text);
+    console.log(tasks);
+    //$("p").replaceWith(text);
 };
 
 //load task from localStorage
 var loadTasks= function() {
     tasks = JSON.parse(localStorage.getItem("tasks"));
-    console.log(tasks);
+    //console.log(tasks);
+
     //if nothing in localStorage, create new object to track all task
     if (!tasks) {
         tasks = {
@@ -31,20 +30,19 @@ var loadTasks= function() {
 
     // loop over object properties
         $.each(tasks, function(tasks) {
-            createTask(tasks.text);
+            createTask(tasks);
         });
 };
 
 var saveTasks = function() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
-    //console.log(tasks);
+    console.log(tasks);
 };
 
 //editable field was un-focused
 $(".workdayTask").on("blur", "textarea", function() {
     //get current value of textarea
     var text = $(this).val();
-    console.log(this);
     
     // trim down list's ID to match object property
     var arrName = $(this).parents('div').attr('id');
@@ -55,6 +53,7 @@ $(".workdayTask").on("blur", "textarea", function() {
 
     //recreate p element
     var taskP = $("<p>").text(text);
+    console.log(taskP);
 
     //replace text with new text
     $(this).replaceWith(taskP);
