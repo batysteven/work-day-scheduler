@@ -2,11 +2,10 @@ var tasks = {};
 
 var createTask = function(taskKey, taskValue) {
     //console.log(taskKey, taskValue);
-    //var taskPara = document.createElement("p");
-    //var textNode = document.createTextNode("new paragraph");
-    //taskPara.appendChild(textNode);
+    // var taskPara = $("<p>").addClass("col-md-10  workdayTask");
+    // $(".workdayTask" + taskKey).append(taskValue);
+
     $(`#${taskKey}`).text(taskValue);
-    //console.log(taskKey, taskValue);
     
 };
 
