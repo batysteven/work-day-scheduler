@@ -1,11 +1,13 @@
 var tasks = {};
 
-var createTask = function(tasks) {
-    var text = $(tasks).val();
-    //recreate p element
-    console.log(text);
-    console.log(tasks);
-    //$("p").replaceWith(text);
+var createTask = function(taskKey, taskValue) {
+    //console.log(taskKey, taskValue);
+    var taskPara = document.createElement("p");
+    var textNode = document.createTextNode("new paragraph");
+    taskPara.appendChild(textNode);
+    $(`#${taskKey}`).text(taskValue);
+    console.log(taskKey, taskValue);
+    
 };
 
 //load task from localStorage
@@ -16,23 +18,23 @@ var loadTasks= function() {
     //if nothing in localStorage, create new object to track all task
     if (!tasks) {
         tasks = {
-            nineTask: [],
-            tenTask: [],
-            elevenTask: [],
-            twelveTask: [],
-            oneTask: [],
-            twoTask: [],
-            threeTask: [],
-            fourTask: [],
-            fiveTask: []
+            nineTask: "",
+            tenTask: "",
+            elevenTask: "",
+            twelveTask: "",
+            oneTask: "",
+            twoTask: "",
+            threeTask: "",
+            fourTask: "",
+            fiveTask: ""
         };
     }
 
-    // loop over object properties
-        $.each(tasks, function(tasks) {
-            createTask(tasks);
-        });
+    for (const task in tasks) {
+        createTask(task, tasks[task]);
+    }
 };
+
 
 var saveTasks = function() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -53,7 +55,6 @@ $(".workdayTask").on("blur", "textarea", function() {
 
     //recreate p element
     var taskP = $("<p>").text(text);
-    console.log(taskP);
 
     //replace text with new text
     $(this).replaceWith(taskP);
