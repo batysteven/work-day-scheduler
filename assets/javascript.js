@@ -2,43 +2,41 @@ var tasks = {};
 
 var createTask = function(taskKey, taskValue) {
     //console.log(taskKey, taskValue);
-    var taskPara = document.createElement("p");
-    var textNode = document.createTextNode("new paragraph");
-    taskPara.appendChild(textNode);
+    //var taskPara = document.createElement("p");
+    //var textNode = document.createTextNode("new paragraph");
+    //taskPara.appendChild(textNode);
     $(`#${taskKey}`).text(taskValue);
-    console.log(taskKey, taskValue);
+    //console.log(taskKey, taskValue);
     
 };
 
 //load task from localStorage
 var loadTasks= function() {
     tasks = JSON.parse(localStorage.getItem("tasks"));
-    //console.log(tasks);
 
     //if nothing in localStorage, create new object to track all task
     if (!tasks) {
         tasks = {
-            nineTask: "",
-            tenTask: "",
-            elevenTask: "",
-            twelveTask: "",
-            oneTask: "",
-            twoTask: "",
-            threeTask: "",
-            fourTask: "",
-            fiveTask: ""
+            nineTasks: "",
+            tenTasks: "",
+            elevenTasks: "",
+            twelveTasks: "",
+            oneTasks: "",
+            twoTasks: "",
+            threeTasks: "",
+            fourTasks: "",
+            fiveTasks: ""
         };
     }
 
     for (const task in tasks) {
         createTask(task, tasks[task]);
-    }
+    };
 };
 
 
 var saveTasks = function() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
-    console.log(tasks);
 };
 
 //editable field was un-focused
@@ -67,12 +65,11 @@ $(".workdayTask").on("click", "p", function() {
     var text = $(this).text().trim();
     
     //replace p element with new text
-    var textInput = $("<textarea>").val(text);
+    var textInput = $("<textarea>").addClass("col-md-10").val(text);
     $(this).replaceWith(textInput);
     
     textInput.trigger("focus");
 });  
-
 
 //load tasks for the first time
 loadTasks();
