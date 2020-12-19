@@ -1,12 +1,21 @@
 var tasks = {};
 
 var createTask = function(taskKey, taskValue) {
-    //console.log(taskKey, taskValue);
-    // var taskPara = $("<p>").addClass("col-md-10  workdayTask");
-    // $(".workdayTask" + taskKey).append(taskValue);
 
-    $(`#${taskKey}`).text(taskValue);
-    
+    let p = document.createElement("p");
+
+    $(`#${taskKey}`).text(taskValue).append(p);
+    //console.log(taskValue);
+
+    //var parent = document.createElement("div");
+    //var newP = document.createElement("p");
+    //parent.appendChild(newP);
+    var taskText = taskValue;
+    var newP = $("<p>").val(taskText);
+    console.log(taskText);
+    $(".workdayTask").remove();
+    console.log(taskText);
+    $(p).replaceWith(newP);
 };
 
 //load task from localStorage
