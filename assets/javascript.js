@@ -1,21 +1,8 @@
 var tasks = {};
 
 var createTask = function(taskKey, taskValue) {
-
-    let p = document.createElement("p");
-
-    $(`#${taskKey}`).text(taskValue).append(p);
-    //console.log(taskValue);
-
-    //var parent = document.createElement("div");
-    //var newP = document.createElement("p");
-    //parent.appendChild(newP);
-    // var taskText = taskValue;
-    // var newP = $("<p>").val(taskText);
-    // console.log(taskText);
-    // $(".workdayTask").remove();
-    // console.log(taskText);
-    // $(p).replace(newP);
+    //finds ID and replaces current P element with new p element with taskValue
+    $(`#${taskKey}>p`).replaceWith("<p>" + taskValue + "</p>");
 };
 
 //load task from localStorage
