@@ -66,5 +66,12 @@ $(".workdayTask").on("click", "p", function() {
     textInput.trigger("focus");
 });  
 
+var currentTime = function() {
+    var now = moment().format('dddd MMM Do, YYYY');
+    console.log(now);
+    $('#currentDay').append(now);
+}
+
 //load tasks for the first time
 loadTasks();
+currentTime();
